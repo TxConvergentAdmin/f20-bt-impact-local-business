@@ -1,35 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import firebase from 'firebase';
 
-const SignUpScreen = ({navigation}) => {
-    state={
-        email:"",
-        password:""
+class SignUpScreen extends Component {
+    
+    constructor(props) {
+        super(props)
+
+        this.state = ({
+            email: '',
+            password: '',
+        })
     }
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.logo}>SignUp</Text>
-            <View style={styles.inputView} >
-                <TextInput  
-                    style={styles.inputText}
-                    placeholder="Email..." 
-                    placeholderTextColor="black"
-                    onChangeText={text => setEmail(Text)}/>
+    signUpUser = (email, password) => {
+        try {
+            if (this.state.password.length < 6) {
+                alert("Please enter atleast 6 characters")
+                return;
+            }
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+        }
+        catch(error) {
+            console.log(error.toString())
+        }
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.logo}>SignUp</Text>
+                <View style={styles.inputView} >
+                    <TextInput  
+                        style={styles.inputText}
+                        placeholder="Email..." 
+                        placeholderTextColor="black"
+                        onChangeText={(email) => this.setState({ email })}/>
+                </View>
+                <View style={styles.inputView} >
+                    <TextInput  
+                        secureTextEntry
+                        style={styles.inputText}
+                        placeholder="Password..." 
+                        placeholderTextColor="black"
+                        onChangeText={(password) => this.setState({ password })}/>
+                </View>
+                <TouchableOpacity style={styles.signBtn} onPress={() => this.signUpUser(this.state.email, this.state.password)}>
+                    <Text style={styles.signText}>SIGNUP</Text>
+                </TouchableOpacity>
             </View>
-            <View style={styles.inputView} >
-                <TextInput  
-                    secureTextEntry
-                    style={styles.inputText}
-                    placeholder="Password..." 
-                    placeholderTextColor="black"
-                    onChangeText={text => setPassword(text)}/>
-            </View>
-            <TouchableOpacity style={styles.signBtn} onPress={()=>navigation.navigate('BevoEats')}>
-                <Text style={styles.signText}>SIGNUP</Text>
-            </TouchableOpacity>
-        </View>
-    );
+        );
+    }
 };
 
 export default SignUpScreen;
@@ -43,7 +65,7 @@ const styles = StyleSheet.create({
     logo:{
         fontWeight:"bold",
         fontSize:50,
-        color:"#BF5700",
+        color:"#FF1300",
         marginBottom:40,
         marginTop:190
     },
@@ -66,7 +88,7 @@ const styles = StyleSheet.create({
     },
     signBtn:{
         width:"80%",
-        backgroundColor:"#BF5700",
+        backgroundColor:"#D4AF37",
         borderRadius:25,
         height:50,
         alignItems:"center",

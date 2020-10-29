@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 import firebase from 'firebase';
@@ -15,7 +15,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-        <AppNavigator />
+      <AppNavigator />
     );
   }
 }

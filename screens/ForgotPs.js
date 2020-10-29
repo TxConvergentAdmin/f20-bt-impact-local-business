@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     logo:{
         fontWeight:"bold",
         fontSize:35,
-        color:"#BF5700",
+        color:"#FF1300",
         marginBottom:40,
         marginTop:190
     },
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     },
     sendBtn:{
         width:"80%",
-        backgroundColor:"#BF5700",
+        backgroundColor:"#D4AF37",
         borderRadius:25,
         height:50,
         alignItems:"center",
